@@ -1,0 +1,211 @@
+/* @scroll-timeline{
+
+} */
+/*this scroll timeline is not supported on any browser*/
+:root{
+    --firstwidth:383px ;
+    --secondwidth:800px ;
+    --firstheight:567px ;
+    --secondheight:1200px ;
+}
+
+
+body{
+    margin: 0;
+    padding: 0;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: sans-serif;
+    background: linear-gradient(90deg , #fff 50%,#4a1010 50%);
+    overflow: hidden
+}
+input{
+    display: none;
+}
+img{
+    width: var(--firstwidth);
+    height: var(--firstheight);
+    object-fit: cover;
+    /* width: 100%;
+    height: 100%; */
+}
+.container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transform-style:preserve-3d ;
+    perspective: 1000px;
+}
+
+.container .book{
+    position: relative;
+    width: var(--firstwidth);
+    height: var(--firstheight);
+    box-shadow: 20px 20px 20px rgba(0, 0, 0, 0.2);
+    transform-style:preserve-3d ;
+    transition: 1.5s;
+    transform: rotateY(35deg) rotateX(35deg);
+}
+/* .container .book:hover{
+    transform: rotateY(0deg) rotateX(0deg);
+} */
+.container-check{
+    display: hidden;
+}
+#containerCheck:checked ~ .container .book{
+    transform: rotateY(0deg) rotateX(0deg);
+
+}
+.container .book:before{
+    content: "";
+    position: absolute;
+    width: 60px;
+    height: 100%;
+    transform-origin: left;
+    background: #611206;
+    background-position:center ;
+    transform: rotateY(90deg);
+}
+.container .book:after{
+    content: "";
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 60px;
+    transform-origin: bottom;
+    background: wheat;
+    background-position:center ;
+    transform: rotatex(90deg);
+}
+
+.flip-book{
+    width: var(--firstwidth);
+    height: var(--firstheight);
+    position: relative;
+    perspective: 1500px;
+}
+.flip{
+    width: 100%;
+    width: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    transform-origin: left; /*bilmiyoum--tuttugun yermiş. mesela burada kitabın merkezi olan nokta flipin solu. soldan eksen alıp dönüş veya diğer animasyonları yapacak*/ 
+    transform-style: preserve-3d;
+    transform: rotateY(0deg);
+    transition: .5s;
+    color: #000;
+}
+h2{
+    margin: 15px;
+}
+p{
+    font-size: 14px;
+    line-height: 24px;
+    margin: 15px;
+}
+li{
+    font-size: 14px;
+    margin: 10px;
+
+}
+.outer-cover{
+    height: 100%;
+    width:100%;
+    background-color: #611206;
+    position: absolute;/**/
+}
+.inner-cover{
+    border: 20px solid rgba(255, 217, 0, 0.74);
+    margin: 30px;
+    height: calc(100% - 110px) ;
+    width: auto;
+    
+}
+.inner-cover h2{
+    color: rgba(255, 255, 255, 0.884);
+    font-size: 60px;
+    text-align: center;
+    margin-top: 40%;
+}
+.front{
+    position: absolute;
+    /* width: 100%;
+    height: 100%; */
+    width: var(--firstwidth);
+    height: var(--firstheight);
+    top: 0;
+    left: 0;
+    background-color: #f2eecb;
+    box-sizing:  border-box;
+    
+    box-shadow: inset 20px 0 50px rgba(0, 0, 0, 0.5) 0 2px 5px rgba(0, 0, 0, 0.5);
+}
+.back   {
+    position: absolute;
+    /* width: 100%;
+    height: 100%; */
+    width: var(--firstwidth);
+    height: var(--firstheight);
+    top: 0;
+    left: 0;
+    z-index: 99;
+    transform: rotateY(180deg);
+    backface-visibility: hidden;
+    /* background-color: #f2eecb; */
+    background-color: #611206;
+    /* background-color: #000; */
+}
+.next-btn{
+    position: absolute;
+    bottom: 13px;
+    right: 13px;
+    cursor: pointer;
+    color: #000;
+}
+.back-btn{
+    position: absolute;
+    bottom: 13px;
+    right: 13px;
+    cursor: pointer;
+    color: #000;
+}
+#p0{
+    z-index: 4;
+}
+#p1{
+    z-index: 3;
+}
+#p2{
+    z-index: 2;
+}
+#p3{
+    z-index: 1;
+}
+#c0:checked ~ .flip-book #p0{
+    transform: rotateY(-180deg);
+    z-index: 0;
+}
+/* #c1:checked ~ .flip-book {
+    transform: scale(1.7)translateX(200px);
+   transition: 1s;
+} */
+
+#c1:checked ~ .flip-book #p1{
+    transform: rotateY(-180deg);
+  
+    z-index: 1;
+}
+#c2:checked ~ .flip-book #p2{
+    transform: rotateY(-180deg);
+    z-index: 2;
+}
+#c3:checked ~ .flip-book #p3{
+    transform: rotateY(-180deg);
+    z-index: 3;
+}
+
+/*next btn ve prev btn ikiside input için label.*/
+/*preve basınca tiki kaldırmış oluyoruz ama başka yerde görüyür olsak tık tık tıklayabilecez*/
